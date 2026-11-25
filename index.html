@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Solar System Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="spaceCanvas"></canvas>
+
+    <div class="hud-top">
+        <div class="hud-header">
+            <h1>3D SOLAR SYSTEM</h1>
+            <span class="year-badge">Year: <strong id="yearCounter">2026</strong></span>
+        </div>
+        <div class="controls">
+            <button id="toggleAnimBtn">Pause</button>
+            <button id="toggleViewBtn">2D Top View</button>
+            <button id="toggleOrbitBtn">Hide Axis</button>
+            <button id="compareModeBtn">Compare</button>
+        </div>
+        <div class="slider-box">
+            <label for="speedSlider">Speed: <span id="speedVal">1.0x</span></label>
+            <input type="range" id="speedSlider" min="0.2" max="4" step="0.2" value="1">
+        </div>
+        <div class="quick-nav">
+            <button data-select="sun">Sun</button>
+            <button data-select="mercury">Mercury</button>
+            <button data-select="venus">Venus</button>
+            <button data-select="earth">Earth</button>
+            <button data-select="mars">Mars</button>
+            <button data-select="jupiter">Jupiter</button>
+            <button data-select="saturn">Saturn</button>
+            <button data-select="uranus">Uranus</button>
+            <button data-select="neptune">Neptune</button>
+        </div>
+    </div>
+
+    <div class="universe tilted" id="universe">
+        <div id="neptune" class="orbit" data-base="55">
+            <div class="planet-wrap" style="top: 50%; left: 96%;">
+                <img src="neptune.png" alt="Neptune" data-planet="neptune">
+            </div>
+            <div id="uranus" class="orbit" data-base="48">
+                <div class="planet-wrap" style="top: 50%; left: 95%;">
+                    <img src="uranus.png" alt="Uranus" data-planet="uranus">
+                </div>
+                <div id="saturn" class="orbit" data-base="42">
+                    <div class="planet-wrap" style="top: 44%; left: 93%;">
+                        <img src="saturn.png" alt="Saturn" data-planet="saturn">
+                    </div>
+                    <div id="jupiter" class="orbit" data-base="36">
+                        <div class="planet-wrap" style="top: 65%; left: 91%;">
+                            <img src="jupiter.png" alt="Jupiter" data-planet="jupiter">
+                        </div>
+                        <div class="asteroid-belt" id="asteroidBelt"></div>
+                        <div id="mars" class="orbit" data-base="30">
+                            <div class="planet-wrap" style="top: 75%; left: 87%;">
+                                <img src="mars.png" alt="Mars" data-planet="mars">
+                            </div>
+                            <div id="earth" class="orbit" data-base="25">
+                                <div class="planet-wrap earth-system" style="top: 53%; left: 91%;">
+                                    <img src="earth.png" alt="Earth" data-planet="earth">
+                                    <div class="moon-orbit" data-base="4">
+                                        <div class="moon"></div>
+                                    </div>
+                                </div>
+                                <div id="venus" class="orbit" data-base="20">
+                                    <div class="planet-wrap" style="top: 40%; left: 91%;">
+                                        <img src="venus.png" alt="Venus" data-planet="venus">
+                                    </div>
+                                    <div id="mercury" class="orbit" data-base="15">
+                                        <div class="planet-wrap" style="top: 42%; left: 91%;">
+                                            <img src="mercury.png" alt="Mercury" data-planet="mercury">
+                                        </div>
+                                        <div id="sun" class="planet-wrap">
+                                            <img src="sun.png" alt="Sun" data-planet="sun">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="infoCard" class="info-card hidden">
+        <button id="closeCard" class="close-btn">&times;</button>
+        <div class="card-header">
+            <img id="cardImg" src="" alt="">
+            <div>
+                <span id="cardType" class="badge">Planet</span>
+                <h2 id="cardTitle">Earth</h2>
+            </div>
+        </div>
+        <p id="cardDesc" class="card-desc"></p>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span class="stat-label">Distance from Sun</span>
+                <span id="cardDist" class="stat-value">149.6M km</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Day Length</span>
+                <span id="cardDay" class="stat-value">24 Hours</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Temperature</span>
+                <span id="cardTemp" class="stat-value">15°C</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Moons</span>
+                <span id="cardMoons" class="stat-value">1</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="compareCard" class="compare-card hidden">
+        <button id="closeCompare" class="close-btn">&times;</button>
+        <h3>Planet Comparison</h3>
+        <div class="compare-selectors">
+            <select id="selectA"></select>
+            <span>VS</span>
+            <select id="selectB"></select>
+        </div>
+        <div id="compareTable" class="compare-table"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
